@@ -1,7 +1,5 @@
 package Java_Queue;
 
-import java.util.Scanner;
-
 class QueueNode {
     char data;
     QueueNode next;
@@ -14,7 +12,6 @@ class QueueNode {
 
 class Queue {
     private QueueNode front, rear;
-    private int size = 0;
 
     public Queue() {
         front = rear = null;
@@ -28,7 +25,6 @@ class Queue {
             rear.next = newNode;
             rear = newNode;
         }
-        size++;
         System.out.println("Enqueue: " + data);
         tampilkan();
     }
@@ -41,7 +37,6 @@ class Queue {
         System.out.println("Dequeue: " + front.data);
         front = front.next;
         if (front == null) rear = null;
-        size--;
         tampilkan();
     }
 
@@ -67,25 +62,6 @@ class Queue {
         tampilkan();
     }
 
-    public void peek() {
-        if (front != null) {
-            System.out.println("Peek: " + front.data);
-        } else {
-            System.out.println("Queue kosong!");
-        }
-    }
-
-    public void clear() {
-        front = rear = null;
-        size = 0;
-        System.out.println("Queue telah dikosongkan.");
-        tampilkan();
-    }
-
-    public int size() {
-        return size;
-    }
-
     public void tampilkan() {
         QueueNode current = front;
         System.out.print("Queue: ");
@@ -99,62 +75,15 @@ class Queue {
 
 class QueueDemo {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        System.out.println("\n=== (:)(:) ===");
         Queue queue = new Queue();
-        char inputChar;
-        boolean running = true;
+        queue.dequeue(); // dequeue kosong
+        queue.enqueue('I');
+        queue.enqueue('N');
+        queue.enqueue('K');
+        queue.enqueue('O');
+        queue.dequeue();
+        queue.swap('O', 'I');
 
-        while (running) {
-            System.out.println("\n==== MENU QUEUE ====");
-            System.out.println("1. Enqueue");
-            System.out.println("2. Dequeue");
-            System.out.println("3. Swap");
-            System.out.println("4. Peek");
-            System.out.println("5. Tampilkan Queue");
-            System.out.println("6. Tampilkan Jumlah Elemen");
-            System.out.println("7. Clear Queue");
-            System.out.println("0. Keluar");
-            System.out.print("Pilih menu: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine(); // clear newline
-
-            switch (choice) {
-                case 1:
-                    System.out.print("Masukkan karakter untuk enqueue: ");
-                    inputChar = scanner.nextLine().charAt(0);
-                    queue.enqueue(inputChar);
-                    break;
-                case 2:
-                    queue.dequeue();
-                    break;
-                case 3:
-                    System.out.print("Masukkan karakter pertama: ");
-                    char a = scanner.nextLine().charAt(0);
-                    System.out.print("Masukkan karakter kedua: ");
-                    char b = scanner.nextLine().charAt(0);
-                    queue.swap(a, b);
-                    break;
-                case 4:
-                    queue.peek();
-                    break;
-                case 5:
-                    queue.tampilkan();
-                    break;
-                case 6:
-                    System.out.println("Jumlah elemen dalam queue: " + queue.size());
-                    break;
-                case 7:
-                    queue.clear();
-                    break;
-                case 0:
-                    running = false;
-                    System.out.println("Terima kasih, program selesai.");
-                    break;
-                default:
-                    System.out.println("Pilihan tidak valid.");
-            }
-        }
-
-        scanner.close();
     }
 }
